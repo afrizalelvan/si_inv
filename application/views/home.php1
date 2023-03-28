@@ -1,0 +1,295 @@
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <!-- <h1>Blank Page</h1> -->
+          </div>
+          
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+           
+
+            <!-- DONUT CHART -->
+            <div class="card direct-chat direct-chat-warning card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Stok Hampir Habis (<?= $stok_aman->stok_aman ?>)</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body" style="height: 400px">
+                <div class="" style="height: 400px">
+                  <?php 
+                    if ($produk->num_rows() > 0 ){ ?>
+
+                      <ul class="nav flex-column">
+                      <?php foreach ($produk->result() as $r) { ?>
+                        <li class="nav-item">
+                          <a href="#" class="nav-link">
+                            <?= $r->nm_produk ?> <span class="float-right badge bg-primary"><?= $r->qty ?></span>
+                          </a>
+                        </li>
+                  <?php } ?>
+                        
+                      </ul>
+              <?php }
+
+                  ?>
+                   
+
+                </div>
+                <!--/.direct-chat-messages-->
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+            <!-- PIE CHART -->
+            <!-- <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Pie Chart</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+            </div> -->
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col (LEFT) -->
+          <div class="col-md-6">
+            <!-- LINE CHART --> 
+           
+
+            <!-- BAR CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <table width="100%" border="0">
+                    <tr>
+                      <td width="40%">Grafik Penjualan Bulan Ini</td>
+                      <td width="10%"></td>
+                      <td>
+                        <select class="form-control" id="store" name="store" >
+                          <?php if ($this->session->userdata('id_toko') == "-"): ?>
+                            <option value="">Pilih</option>
+                          <?php endif ?>
+
+                          <?php foreach ($store as $r): ?>
+                            <option value="<?= $r->id_toko ?>" <?= $store_m == $r->id_toko ? 'selected' : '' ?>><?= $r->nm_toko ?></option>
+                          <?php endforeach ?>
+                        </select>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  
+                </h3>
+
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body" style="height: 400px">
+                <div class="chart">
+                  <canvas id="donutChart"  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 398px;" width="398" height="250" class="chartjs-render-monitor"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          
+          </div>
+          <!-- /.col (RIGHT) -->
+        </div>
+        <div class="row">
+          
+          <div class="col-md-6">
+            <!-- LINE CHART --> 
+           
+
+            <!-- BAR CHART -->
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <table width="100%" border="0">
+                    <tr>
+                      <td width="40%">Grafik Penjualan Hari Ini</td>
+                      <td width="10%"></td>
+                      <td>
+                        <select class="form-control" id="store2" name="store2" >
+                          <?php if ($this->session->userdata('id_toko') == "-"): ?>
+                            <option value="">Pilih</option>
+                          <?php endif ?>
+
+                          <?php foreach ($store as $r): ?>
+                            <option value="<?= $r->id_toko ?>" <?= $store_d == $r->id_toko ? 'selected' : '' ?>><?= $r->nm_toko ?></option>
+                          <?php endforeach ?>
+                        </select>
+                      </td>
+                    </tr>
+                  </table>
+                </h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+              <div class="card-body" style="height: 400px">
+                <div class="chart">
+                  <canvas id="donutChart2"  style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 398px;" width="398" height="250" class="chartjs-render-monitor"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+
+          
+          </div>
+          <!-- /.col (RIGHT) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+<script>
+  $(function () {
+    loadChart()
+    
+
+
+  })
+
+  function loadChart(){
+    var a = <?= $chart_sales ?>;
+
+    var arr_kategori = []
+    var arr_total = []
+    var arr_color = []
+
+    for (var i = 0; i < a.length; i++) {
+      
+      arr_kategori.push(a[i].nm_kategori)
+      arr_total.push(parseInt(a[i].total))
+      arr_color.push(<?= $chart_color ?>[i].color)
+    }
+    
+
+    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
+
+    var donutData        = {
+      labels: arr_kategori,
+      datasets: [
+        {
+          data: arr_total,
+          backgroundColor : arr_color,
+        }
+      ]
+    }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions,
+    })
+
+    loadChart2()
+  }
+
+  function loadChart2(){
+    var a = <?= $chart_sales2 ?>;
+
+    var arr_kategori = []
+    var arr_total = []
+    var arr_color = []
+
+    for (var i = 0; i < a.length; i++) {
+      
+      arr_kategori.push(a[i].nm_kategori)
+      arr_total.push(parseInt(a[i].total))
+      arr_color.push(<?= $chart_color2 ?>[i].color)
+    }
+    
+
+    var donutChartCanvas = $('#donutChart2').get(0).getContext('2d')
+
+    var donutData        = {
+      labels: arr_kategori,
+      datasets: [
+        {
+          data: arr_total,
+          backgroundColor : arr_color,
+        }
+      ]
+    }
+    var donutOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(donutChartCanvas, {
+      type: 'doughnut',
+      data: donutData,
+      options: donutOptions,
+    })
+
+  }
+
+  $('#store, #store2').on('change', function () {
+        base_url = '<?= base_url() ?>Master/index'
+        m = $('#store').val()
+        d = $('#store2').val()
+        window.location = base_url + '?m='+m+'&d='+d; // redirect
+        return false;
+    });
+
+  function addCommas(nStr)
+ {
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    return x1 + x2;
+ }
+</script>
